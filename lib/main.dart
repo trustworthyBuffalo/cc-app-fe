@@ -1,8 +1,15 @@
 import 'package:cobaaja/Screen/login.dart';
+import 'package:cobaaja/Screen/profil.dart';
+import 'package:cobaaja/config/db.dart';
 import 'package:flutter/material.dart';
-import 'Screen/loading.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-void main() {
+void main() async {
+
+  sqfliteFfiInit();
+
+  DB.dbInit();
+
   runApp(const MyApp());
 }
 

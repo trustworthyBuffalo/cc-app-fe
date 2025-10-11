@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+import 'package:cobaaja/Screen/profil.dart';
+import 'package:cobaaja/config/db.dart';
+import 'package:cobaaja/model/user.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cobaaja/Screen/signin.dart';
@@ -13,6 +19,9 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool _jaga = true;
+  Future<http.Response?>? fethData;
+
+  var message = false;
 
   void _tombolpass() {
     setState(() {
@@ -178,7 +187,30 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         width: 150,
                         child: ElevatedButton(
-                          onPressed: (){},
+                          onPressed: () async {
+
+                            final response = await User.login(emailController.text, passwordController.text);
+
+                            if (response == null) return;
+
+                            final data = json.decode(response.body);
+                            if (data["success"]) {
+                              
+                              final db = await DB.getDB();
+                              await db.execute('CREATE TABLE IF NOT EXISTS tokens (id INTEGER PRIMARY KEY, token TEXT)');
+                              await db.insert("tokens", {"token": data["data"]["token"]});
+                              var token = await db.query('tokens');
+                              print(token);
+
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilPage(),));
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(data["message"] ?? "login gagal"))
+                              );
+                            }
+
+
+                          },  
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.symmetric(vertical: 4),
                             shape: RoundedRectangleBorder(
@@ -186,10 +218,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             backgroundColor: Color(0xFF1867C0),
                           ),
-                          child: Text(
-                            "Login",
-                            style: TextStyle(fontSize: 18, color: Colors.white),
-                          ),
+                          child: Text("login")
                         ),
                       ),
                       SizedBox(height: 20),
