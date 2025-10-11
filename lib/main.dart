@@ -1,3 +1,4 @@
+import 'package:cobaaja/Screen/login.dart';
 import 'package:flutter/material.dart';
 import 'Screen/loading.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Login Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: Home(),
+      home: LoginPage(),
     );
   }
 }
