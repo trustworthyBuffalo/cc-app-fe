@@ -1,12 +1,13 @@
 import 'dart:convert';
 
-import 'package:cobaaja/Screen/profil.dart';
+import 'package:cobaaja/Screen/pages/profil.dart';
 import 'package:cobaaja/config/db.dart';
 import 'package:cobaaja/model/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cobaaja/Screen/signin.dart';
+import 'package:cobaaja/Screen/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
