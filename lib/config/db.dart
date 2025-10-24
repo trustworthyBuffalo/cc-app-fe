@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class DB {
@@ -5,9 +7,15 @@ class DB {
   static late Database db;
 
   static Future<void> dbInit()  async {
+
     sqfliteFfiInit();
-    db = await databaseFactoryFfi.openDatabase("my_database.db");
+    var dbPath = "my_database.db";
+
+    db = await databaseFactoryFfi.openDatabase(dbPath);
+
     print("database connected");
+
+
   }
 
   static Future<Database> getDB() async {

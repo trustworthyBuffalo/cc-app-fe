@@ -1,13 +1,12 @@
 import 'dart:convert';
 
 import 'package:cobaaja/Screen/pages/profil.dart';
+import 'package:cobaaja/Screen/signin.dart';
 import 'package:cobaaja/config/db.dart';
 import 'package:cobaaja/model/user.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cobaaja/Screen/signin.dart';
-import 'package:cobaaja/Screen/main_page.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -196,12 +195,11 @@ class _LoginPageState extends State<LoginPage> {
 
                             final data = json.decode(response.body);
                             if (data["success"]) {
-                              
-                              final db = await DB.getDB();
-                              await db.execute('CREATE TABLE IF NOT EXISTS tokens (id INTEGER PRIMARY KEY, token TEXT)');
-                              await db.insert("tokens", {"token": data["data"]["token"]});
-                              var token = await db.query('tokens');
-                              print(token);
+                              // final db = await DB.getDB();
+                              // await db.execute('CREATE TABLE IF NOT EXISTS tokens (id INTEGER PRIMARY KEY, token TEXT)');
+                              // await db.insert("tokens", {"token": data["data"]["token"]});
+                              // var token = await db.query('tokens');
+                              // print(token);
 
                               Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilPage(),));
                             } else {

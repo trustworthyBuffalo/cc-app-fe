@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cobaaja/config/db.dart';
 import 'package:cobaaja/model/url.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,13 +15,19 @@ class User {
       "password" : password,
     };
 
-    var url = Uri.https(URL.url, "/user/register");
+    var endPoint =  "/user/register";
+
+    var url = Uri.https(URL.url, endPoint);
 
     try {
+
+      // requesting
       final response = await http.post(url, 
             headers: { "Content-Type": "application/json" },
             body: json.encode(body), );
+
       return response;
+
     } catch (e) {
       print("Error: $e");
       return null;
@@ -34,15 +41,20 @@ static Future<http.Response?> login (String email, String password) async {
       "password" : password,
     };
 
-    var url = Uri.https(URL.url, "/user/login");
+    var endPoint = "/user/login";
+
+    var url = Uri.https(URL.url, endPoint);
   
     try {
+
+      // request
       final response = await http.post(url, 
             headers: { "Content-Type": "application/json" },
             body: json.encode(body), );
 
     print(response.body);
     return response;
+
     } catch(e) {
       print("Error: $e");
       return null;
@@ -51,21 +63,42 @@ static Future<http.Response?> login (String email, String password) async {
   }
 
 static Future<http.Response?> getMe() async {
-  final url = Uri.https(URL.url, "/user/getme");
+
+  var endPoint = "/user/getme";
+
+  final url = Uri.https(URL.url, endPoint);
   
   try {
+    
+
+    // request
     final response = await http.get(url);
 
-    print(response.body);
     print(response.body);
     return response;
     
     }
+
     catch(e) {
   
       print("Error: $e");
       return null;
     }
 
+}
+
+static Future<bool> checkToken() async {
+    
+    // checks active tokens to prevent repeated logins
+
+    final db = await DB.getDB();
+    final data = await db.rawQuery('SELECT count(*) AS `count` FROM tokens');
+
+    if (data[0]['count']! as int > 0) {
+      print(data[0]['count']! as int);
+      return true;
+    }
+
+    return false;
 }
 }

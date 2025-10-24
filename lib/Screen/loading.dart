@@ -1,5 +1,7 @@
 // splash.dart
 import 'dart:async';
+import 'package:cobaaja/Screen/pages/profil.dart';
+import 'package:cobaaja/model/user.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
 
@@ -11,15 +13,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Future<void> _load() async {
-    await Future.delayed(const Duration(seconds: 3));
-  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _load(),
+      future: User.checkToken(),
       builder: (context, snapshot) {
+
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             backgroundColor: Colors.blue[300],
@@ -64,15 +64,24 @@ class _HomeState extends State<Home> {
             ),
           );
         } else {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (_) => LoginPage()),
-            );
-          });
-          return SizedBox.shrink();
-        }
-      },
+
+          if (snapshot.hasData) {
+
+          // active token found
+          if (snapshot.data!) {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProfilPage(),));
+          },); 
+          } else {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage(),));
+            },);
+          }
+        } 
+      return SizedBox.shrink();
+      }
+      }
     );
   }
+
 }

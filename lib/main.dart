@@ -9,7 +9,7 @@ void main() async {
 
   sqfliteFfiInit();
 
-  DB.dbInit();
+  await DB.dbInit();
 
   runApp(const MyApp());
 }
