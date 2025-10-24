@@ -1,0 +1,28 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "run desktop",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "windows" 
+    }
+    // ,
+    // {
+    //   "name": "Run on Physical Device",
+    //   "request": "launch",
+    //   "type": "dart",
+    //   "program": "lib/main.dart",
+    //   "deviceId": "192.168.1.101:5555"
+    // },
+    // {
+    //   "name": "Run on Both Devices",
+    //   "compound": "true",
+    //   "configurations": [
+    //     "Run on Emulator",
+    //     "Run on Physical Device"
+    //   ]
+    // }
+  ]
+}
