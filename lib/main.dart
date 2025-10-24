@@ -1,5 +1,3 @@
-import 'package:cobaaja/Screen/login.dart';
-import 'package:cobaaja/Screen/pages/profil.dart';
 import 'package:cobaaja/Screen/loading.dart';
 import 'package:cobaaja/config/db.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +5,8 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() async {
 
-  sqfliteFfiInit();
+
+  WidgetsFlutterBinding.ensureInitialized(); 
 
   await DB.dbInit();
 

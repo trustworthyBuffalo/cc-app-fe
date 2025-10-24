@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cobaaja/config/db.dart';
+import 'package:cobaaja/model/http_client.dart';
 import 'package:cobaaja/model/url.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,15 +15,14 @@ class User {
       "email" : email,
       "password" : password,
     };
-
-    var endPoint =  "/user/register";
-
-    var url = Uri.https(URL.url, endPoint);
-
+    final endPoint =  "/user/register";
+    final url = Uri.https(URL.url, endPoint);
+    final client = LoggingClient(http.Client());
+    
     try {
 
       // requesting
-      final response = await http.post(url, 
+      final response = await client.post(url, 
             headers: { "Content-Type": "application/json" },
             body: json.encode(body), );
 
