@@ -8,3 +8,4 @@ class ApiResult<T> {
 
   bool get isSuccess => error == null;
 }
+

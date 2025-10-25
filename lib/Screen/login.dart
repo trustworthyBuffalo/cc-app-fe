@@ -198,7 +198,7 @@ class _LoginPageState extends State<LoginPage> {
 
                             
 
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilPage(),));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilPage(token: response.data,),));
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text(response.error!))

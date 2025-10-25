@@ -44,7 +44,6 @@ class _MainPageState extends State<MainPage> {
        ChatPage(),
        AddPostPage(),
        NotificationPage(),
-       ProfilPage(),
     ];
 
     return Scaffold(

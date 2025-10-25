@@ -1,21 +1,23 @@
 {
   "version": "0.2.0",
   "configurations": [
-    // {
-    //   "name": "run desktop",
-    //   "request": "launch",
-    //   "type": "dart",
-    //   "program": "lib/main.dart",
-    //   "deviceId": "windows" 
-    // }
-    // ,
     {
-      "name": "run mobile",
+      "name": "run desktop",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "deviceId": "10.134.19.103:5555"
-    },
+      "deviceId": "windows" 
+    }
+    ,
+
+    // {
+    //   "name": "run mobile",
+    //   "request": "launch",
+    //   "type": "dart",
+    //   "program": "lib/main.dart",
+    //   "deviceId": "10.134.19.103:5555"
+    // },
+
     // {
     //   "name": "Run on Both Devices",
     //   "compound": "true",
