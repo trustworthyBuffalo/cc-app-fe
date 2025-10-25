@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cobaaja/model/user.dart';
+import 'package:cobaaja/service/user.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cobaaja/Screen/login.dart';
@@ -242,26 +242,6 @@ class _SigninPageState extends State<SigninPage> {
                         width: 150,
                         child: ElevatedButton(
                           onPressed: () async {
-
-                            final response = await User.register(
-                              _usernameController.text, 
-                              _emailController.text, 
-                              _passwordController.text);
-
-                            if (response == null) return;
-
-                            final data = json.decode(response.body);
-
-                            if (data["success"]) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("register success"))
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(data["message"]))
-                              );
-                            }
-
                           },
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.symmetric(vertical: 4),

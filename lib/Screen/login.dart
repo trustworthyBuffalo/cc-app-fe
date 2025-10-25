@@ -4,6 +4,7 @@ import 'package:cobaaja/Screen/pages/profil.dart';
 import 'package:cobaaja/Screen/signin.dart';
 import 'package:cobaaja/config/db.dart';
 import 'package:cobaaja/model/user.dart';
+import 'package:cobaaja/service/user.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -189,22 +190,18 @@ class _LoginPageState extends State<LoginPage> {
                         child: ElevatedButton(
                           onPressed: () async {
 
-                            final response = await User.login(emailController.text, passwordController.text);
+                            final response = await UserService.login(emailController.text, passwordController.text);
 
-                            if (response == null) return;
+                            if (response.isSuccess) {
 
-                            final data = json.decode(response.body);
-                            if (data["success"]) {
-                              // final db = await DB.getDB();
-                              // await db.execute('CREATE TABLE IF NOT EXISTS tokens (id INTEGER PRIMARY KEY, token TEXT)');
-                              // await db.insert("tokens", {"token": data["data"]["token"]});
-                              // var token = await db.query('tokens');
-                              // print(token);
+                              print(response.data!);
+
+                            
 
                               Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilPage(),));
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(data["message"] ?? "login gagal"))
+                                SnackBar(content: Text(response.error!))
                               );
                             }
 

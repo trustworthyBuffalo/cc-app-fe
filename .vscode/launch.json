@@ -14,7 +14,7 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "deviceId": "10.130.115.167:5555"
+      "deviceId": "10.134.19.103:5555"
     },
     // {
     //   "name": "Run on Both Devices",

@@ -12,6 +12,6 @@ class LoggingClient extends http.BaseClient {
     print("⬆ [HTTP REQUEST][${request.method} ${request.url}]");
     final response = await _inner.send(request);
     print("⬇ [HTTP RESP] [${response.statusCode} [${response.reasonPhrase}]]");
-    throw UnimplementedError();
+    return response;
   }
 }
