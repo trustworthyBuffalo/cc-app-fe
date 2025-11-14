@@ -1,19 +1,16 @@
-import 'package:cobaaja/Screen/loading.dart';
-import 'package:cobaaja/Screen/login.dart';
-import 'package:cobaaja/Screen/main_page.dart';
 import 'package:cobaaja/config/db.dart';
+import 'package:cobaaja/screen_v2/login_screen.dart';
+import 'package:cobaaja/screen_v2/register_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() async {
+  // firebase
+  WidgetsFlutterBinding.ensureInitialized();
 
-
-  WidgetsFlutterBinding.ensureInitialized(); 
-
+  // sqflite db init
   await DB.dbInit();
 
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Login Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: MainPage(),
+      home: LoginScreen(),
     );
   }
 }

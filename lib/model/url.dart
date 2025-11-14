@@ -1,3 +1,3 @@
 class URL {
-  static final String url = "cc-app-be-production.up.railway.app";
+  static final String baseUrl = "cc-app-be-production.up.railway.app";
 }

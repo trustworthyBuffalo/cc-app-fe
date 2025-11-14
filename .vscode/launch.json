@@ -1,14 +1,22 @@
 {
   "version": "0.2.0",
   "configurations": [
+    // {
+    //   "name": "run desktop",
+    //   "request": "launch",
+    //   "type": "dart",
+    //   "program": "lib/main.dart",
+    //   "deviceId": "windows" 
+    // }
+    // ,
+
     {
-      "name": "run desktop",
+      "name": "run linux",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "deviceId": "windows" 
+      "deviceId": "linux" 
     }
-    ,
 
     // {
     //   "name": "run mobile",

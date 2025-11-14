@@ -1,8 +1,8 @@
-import 'package:cobaaja/service/user.dart';
 import 'package:cobaaja/tools/datetime.dart';
 
-class User {
+// ====== From server
 
+class User {
   final int id;
   final String name;
   final String email;
@@ -22,7 +22,7 @@ class User {
     this.nim,
     this.handphone,
     this.updatedAt,
-    this.deletedAt
+    this.deletedAt,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -34,7 +34,47 @@ class User {
       nim: json['nim'],
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: checkDateTime(json['updated_at']),
-      deletedAt: checkDateTime(json['deleted_at'])
+      deletedAt: checkDateTime(json['deleted_at']),
     );
+  }
+}
+
+//==== Send to server
+
+class UserRegister {
+  final String name;
+  final String handphone;
+  final String email;
+  final String password;
+
+  UserRegister({
+    required this.name,
+    required this.handphone,
+    required this.email,
+    required this.password,
+  });
+
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> data = {
+      "name": name,
+      "email": email,
+      "password": password,
+      "handphone": handphone,
+    };
+
+    return data;
+  }
+}
+
+class UserLogin {
+  final String email;
+  final String password;
+
+  UserLogin({required this.email, required this.password});
+
+  Map<String, String> toMap() {
+    final Map<String, String> data = {"email": email, "password": password};
+
+    return data;
   }
 }

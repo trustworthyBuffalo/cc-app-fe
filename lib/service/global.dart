@@ -32,9 +32,7 @@ Future<String> getToken(Database db) async {
 }
 
 Future<void> insertToken(String token) async {
+  final db = DB.getDB();
 
-  final db =  DB.getDB();
-
-  await db.insert("tokens", {"token" : token});
-  
+  await db.insert("tokens", {"token": token});
 }

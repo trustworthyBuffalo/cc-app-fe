@@ -9,9 +9,11 @@ class LoggingClient extends http.BaseClient {
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
     // TODO: implement send
 
-    print("⬆ [HTTP REQUEST][${request.method} ${request.url}]");
+    print("--> [HTTP REQUEST][${request.method} ${request.url}]");
     final response = await _inner.send(request);
-    print("⬇ [HTTP RESP] [${response.statusCode}] [${response.reasonPhrase}]]");
+    print(
+      "<-- [HTTP RESPONSE] [${response.statusCode}] [${response.reasonPhrase}]]",
+    );
     return response;
   }
 }
