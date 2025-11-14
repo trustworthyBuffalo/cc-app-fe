@@ -16,15 +16,15 @@
       "type": "dart",
       "program": "lib/main.dart",
       "deviceId": "linux" 
-    }
+    },
 
-    // {
-    //   "name": "run mobile",
-    //   "request": "launch",
-    //   "type": "dart",
-    //   "program": "lib/main.dart",
-    //   "deviceId": "10.134.19.103:5555"
-    // },
+    {
+      "name": "run mobile",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "10.136.196.117:5555"
+    },
 
     // {
     //   "name": "Run on Both Devices",

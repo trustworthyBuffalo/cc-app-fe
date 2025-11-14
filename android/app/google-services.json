@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1097723708198",
+    "project_id": "cc-app-d0124",
+    "storage_bucket": "cc-app-d0124.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097723708198:android:14c70808da1b710380f7e7",
+        "android_client_info": {
+          "package_name": "com.example.cobaaja"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXuJuIlGxipZmvzF2JfcoyH1E1WJ04D_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
