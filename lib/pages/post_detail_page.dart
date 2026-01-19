@@ -197,7 +197,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
           SizedBox(height: 12),
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            padding:  EdgeInsets.symmetric(horizontal: 40.0),
             child: Text(content, style: TextStyle(fontSize: 15)),
           ),
 
@@ -246,7 +246,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
             ),
           ),
 
-          const Divider(height: 30),
+           Divider(height: 30),
 
           Text(
             "Komentar",
@@ -269,3 +269,6 @@ class _PostDetailPageState extends State<PostDetailPage> {
     );
   }
 }
+
+
+
