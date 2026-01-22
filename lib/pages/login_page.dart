@@ -16,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   bool loading = false;
 
   void login() async {
-    if (loading) return; // cegah double tap
+    if (loading) return;
 
     try {
       setState(() => loading = true);
@@ -26,8 +26,6 @@ class _LoginPageState extends State<LoginPage> {
         password: password.text,
       );
 
-      // ❗ Jangan navigate apa-apa
-      // AuthGate yang akan pindahkan otomatis
     } on FirebaseAuthException catch (e) {
       if (!mounted) return;
 
@@ -57,12 +55,12 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    const Color primaryColor = Color(0xFF1867C0);
+     Color primaryColor = Color(0xFF1867C0);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F6FA),
+      backgroundColor:  Color(0xFFF4F6FA),
       appBar: AppBar(
-        title: const Text(
+        title:  Text(
           "Login",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -72,11 +70,10 @@ class _LoginPageState extends State<LoginPage> {
         centerTitle: true,
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding:  EdgeInsets.all(16),
         children: [
-          const SizedBox(height: 20),
+           SizedBox(height: 20),
 
-          // ================= EMAIL =================
           _FormCard(
             child: TextField(
               controller: email,
@@ -88,9 +85,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
 
-          const SizedBox(height: 12),
+           SizedBox(height: 12),
 
-          // ================= PASSWORD =================
           _FormCard(
             child: TextField(
               controller: password,
@@ -103,14 +99,13 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
 
-          const SizedBox(height: 24),
+           SizedBox(height: 24),
 
-          // ================= LOGIN BUTTON =================
           Container(
             height: 50,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
-              boxShadow: const [
+              boxShadow:  [
                 BoxShadow(color: Colors.black12, blurRadius: 6),
               ],
             ),
@@ -124,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               onPressed: loading ? null : login,
               child: loading
-                  ? const SizedBox(
+                  ?  SizedBox(
                       height: 24,
                       width: 24,
                       child: CircularProgressIndicator(
@@ -132,16 +127,15 @@ class _LoginPageState extends State<LoginPage> {
                         strokeWidth: 2,
                       ),
                     )
-                  : const Text(
+                  :  Text(
                       "Login",
                       style: TextStyle(fontSize: 16),
                     ),
             ),
           ),
 
-          const SizedBox(height: 12),
+           SizedBox(height: 12),
 
-          // ================= REGISTER =================
           Center(
             child: TextButton(
               onPressed: () {
@@ -150,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                   MaterialPageRoute(builder: (_) =>  RegisterPage()),
                 );
               },
-              child: const Text("Dont have an account? SignIn"),
+              child:  Text("Dont have an account? SignIn"),
             ),
           ),
         ],
