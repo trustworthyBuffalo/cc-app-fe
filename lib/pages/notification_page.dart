@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:projek_cp/l10n/app_localizations.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final language = AppLocalizations.of(context)!;
+  final Color primaryColor =  Color(0xFF1867C0);
+  final Color bgColor =  Color(0xFFF4F6FA);
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F6FA),
+      backgroundColor: bgColor,
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
-          "Notifikasi",
+          language.notification,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: primaryColor,
         elevation: 0,
-        foregroundColor: Colors.black,
+        foregroundColor: Colors.white,
         actions: [
           IconButton(
             icon: Icon(Icons.more_vert),
@@ -22,7 +27,7 @@ class NotificationPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const NotificationSettingsPage(),
+                  builder: (context) => NotificationSettingsPage(),
                 ),
               );
             },
@@ -34,17 +39,17 @@ class NotificationPage extends StatelessWidget {
         children: [
           _NotificationCard(
             name: "Rina",
-            message: "menyukai postinganmu",
+            message: language.likeNotif,
             time: "2 menit lalu",
           ),
           _NotificationCard(
             name: "Doni",
-            message: "mengomentari postinganmu",
+            message: language.commentNotif,
             time: "1 jam lalu",
           ),
           _NotificationCard(
             name: "Andi",
-            message: "mulai mengikuti kamu",
+            message: language.followNotif,
             time: "Kemarin",
           ),
         ],
@@ -115,22 +120,23 @@ class NotificationSettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final language = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text("Pengaturan Notifikasi")),
+      appBar: AppBar(title: Text(language.notification)),
       body: ListView(
         children: [
           SwitchListTile(
-            title: Text("Notifikasi Suka"),
+            title: Text(language.likeNotifSet),
             value: true,
             onChanged: null,
           ),
           SwitchListTile(
-            title: Text("Notifikasi Komentar"),
+            title: Text(language.commentNotifSet),
             value: true,
             onChanged: null,
           ),
           SwitchListTile(
-            title: Text("Notifikasi Pengikut"),
+            title: Text(language.followNotifSet),
             value: false,
             onChanged: null,
           ),

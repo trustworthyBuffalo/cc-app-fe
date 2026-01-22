@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import '../model_post.dart';
+import '../models/model_post.dart';
 
 class HomePage extends StatefulWidget {
   final Function(Map<String, dynamic>) onOpenDetail;

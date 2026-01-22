@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:projek_cp/l10n/app_localizations.dart';
 import 'package:projek_cp/main_page.dart';
-import 'package:projek_cp/model_post.dart';
+import 'package:projek_cp/models/model_post.dart';
 
 class AddPostPage extends StatefulWidget {
   const AddPostPage({super.key});
@@ -12,6 +13,9 @@ class AddPostPage extends StatefulWidget {
 
 class _AddPostPageState extends State<AddPostPage> {
   List<Post> details = [];
+
+  final Color primaryColor = Color(0xFF1867C0);
+  final Color bgColor = Color(0xFFF4F6FA);
   bool isChecked = false;
   final TextEditingController postController = TextEditingController();
   final TextEditingController imageUrlController = TextEditingController();
@@ -45,38 +49,51 @@ class _AddPostPageState extends State<AddPostPage> {
 
   @override
   Widget build(BuildContext context) {
+    final language = AppLocalizations.of(context)!;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: bgColor,
       appBar: AppBar(
-        title: Text("Tambah Postingan"),
-        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: Text(
+          language.addPost,
+          style:  TextStyle(fontWeight: FontWeight.bold),
+        ),
+        elevation: 0,
+        backgroundColor: primaryColor,
+        foregroundColor: Colors.white,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
+      body: ListView(
+        padding: EdgeInsets.all(12),
+        children: [
+          _FormCard(
+            child: TextField(
               controller: imageUrlController,
               decoration: InputDecoration(
-                labelText: "Masukkan URL Gambar",
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.image),
+                prefixIcon:  Icon(Icons.image),
+                hintText: language.addImageURL,
+                border: InputBorder.none,
               ),
             ),
+          ),
 
-            SizedBox(height: 16),
+           SizedBox(height: 12),
 
-            TextField(
+          _FormCard(
+            child: TextField(
               controller: postController,
               decoration: InputDecoration(
-                labelText: "Tulis sesuatu...",
-                border: OutlineInputBorder(),
+                hintText: language.writePost,
+                border: InputBorder.none,
               ),
-              maxLines: 4,
+              maxLines: 5,
             ),
+          ),
 
-            SizedBox(height: 16),
-            Row(
+           SizedBox(height: 12),
+
+          _FormCard(
+            child: Row(
               children: [
                 Checkbox(
                   value: isChecked,
@@ -86,46 +103,73 @@ class _AddPostPageState extends State<AddPostPage> {
                     });
                   },
                 ),
-                Text("Ads"),
+                Text(language.ads),
               ],
             ),
+          ),
 
-            SizedBox(height: 16),
+           SizedBox(height: 20),
 
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: () async {
-                  final description = postController.text.trim();
-                  final imageUrl = imageUrlController.text.trim();
-
-                  if (description.isEmpty || imageUrl.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("Deskripsi dan URL gambar wajib diisi!"),
-                      ),
-                    );
-                    return;
-                  }
-
-                  await addData(description, imageUrl, isChecked);
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Postingan berhasil dikirim!")),
-                  );
-
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainPage()),
-                  );
-                },
-                icon: Icon(Icons.send),
-                label: Text("Kirim"),
-              ),
+          Container(
+            height: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14),
+              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6)],
             ),
-          ],
-        ),
+            child: ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+              ),
+              onPressed: () async {
+                final description = postController.text.trim();
+                final imageUrl = imageUrlController.text.trim();
+
+                if (description.isEmpty || imageUrl.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(language.desImgRequired)),
+                  );
+                  return;
+                }
+
+                await addData(description, imageUrl, isChecked);
+
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(language.succesSend)));
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainPage()),
+                );
+              },
+              icon: Icon(Icons.send),
+              label: Text(language.succesSend),
+            ),
+          ),
+        ],
       ),
+    );
+  }
+}
+class _FormCard extends StatelessWidget {
+  final Widget child;
+
+  const _FormCard({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding:  EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 6)],
+      ),
+      child: child,
     );
   }
 }
